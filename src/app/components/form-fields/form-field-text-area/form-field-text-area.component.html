@@ -1,0 +1,12 @@
+@if (form) {
+  <div [formGroup]="form" [className]="'field '+ (form.get(controlName)?.invalid && form.get(controlName)?.touched? 'error': '')">
+    <label [for]="controlName">{{fieldName}}</label>
+    <textarea [value]="value" [placeholder]="placeholder ?? fieldName+'...'" formControlName="{{controlName}}" [name]="controlName" [id]="controlName"></textarea>
+
+    <div class="field-error" *ngIf="form.get(controlName)?.invalid && form.get(controlName)?.touched">
+      @for (error of errors; track $index) {
+        <span *ngIf="form.get(controlName)?.errors?.[error.type]">{{error.message}}</span>
+      }
+    </div>
+  </div>
+}

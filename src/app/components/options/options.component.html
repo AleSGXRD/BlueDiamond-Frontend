@@ -1,0 +1,14 @@
+<div class="flex flex-row w-full justify-between">
+  <!-- Filters -->
+  <div>
+
+  </div>
+  <!-- Buttons options -->
+  <div>
+    @if (addElementDescription) {
+      <app-button (click)="addElementEmitter.emit()" [color]="'green'" >
+        {{addElementDescription}}
+      </app-button>
+    }
+  </div>
+</div>

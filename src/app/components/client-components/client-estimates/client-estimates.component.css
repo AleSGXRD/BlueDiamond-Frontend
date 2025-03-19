@@ -1,0 +1,8 @@
+
+.unpaided{
+  @apply border-2 border-orange-300;
+}
+
+.paided{
+  @apply border-2 border-green-300;
+}

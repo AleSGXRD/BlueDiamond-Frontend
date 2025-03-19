@@ -1,0 +1,6 @@
+.active{
+  @apply text-green-400;
+}
+.desactive{
+  @apply text-gray-400;
+}

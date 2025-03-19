@@ -1,0 +1,17 @@
+.layout {
+  @apply flex flex-row min-h-screen w-full;
+}
+
+.content {
+  @apply grid grid-cols-1 content-start gap-4 items-center px-0;
+  flex: 1; /* Expande el contenido para llenar el espacio disponible */
+  z-index: 10;
+  padding: 0 0 10rem 0 !important;
+}
+.image-container{
+  @apply fixed flex flex-col justify-center items-center h-full w-full;
+}
+
+.logo{
+  @apply  opacity-25 w-full px-8  max-w-3xl;
+}

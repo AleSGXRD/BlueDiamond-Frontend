@@ -1,0 +1,25 @@
+
+<table class="w-full">
+  <thead>
+    <tr class="grid grid-cols-4">
+      <th class="col-span-2">
+        Item
+      </th>
+      <th>
+        Discount
+      </th>
+      <th>
+        Qty
+      </th>
+    </tr>
+  </thead>
+  <tbody class="flex flex-col gap-4">
+    @for (item of this.items; track $index) {
+      <tr class="grid grid-cols-4 gap-4">
+        <td class="col-span-2 name">{{item.name}}</td>
+        <td ><input class="input" type="number" (input)="onInputDiscount($event, item.value)" [name]="'discount-'+item.value" [id]="'discount-'+item.value" placeholder="0" [value]="item.discount"></td>
+        <td ><input class="input" type="number" (input)="onInputQuantity($event, item.value)" [name]="'quantity-'+item.value" [id]="'quantity-'+item.value" placeholder="1" [value]="item.quantity"></td>
+      </tr>
+    }
+  </tbody>
+</table>

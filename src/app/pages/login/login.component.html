@@ -1,0 +1,13 @@
+@defer () {
+  <login-layout>
+    <section >
+      <form [formGroup]="form" (submit)="submitLogin()" class="form">
+        <form-field-text [fieldName]="'Nombre de usuario.'" [controlName]="'name'" [errors]="formErrorName" [form]="this.form"></form-field-text>
+        <form-field-password [fieldName]="'Contraseña de usuario.'" [controlName]="'password'" [errors]="formErrorPassword" [form]="this.form"></form-field-password>
+        <app-button [type]="'submit'" [color]="'gray'" class="w-[100%]" >
+          Enviar
+        </app-button>
+      </form>
+    </section>
+  </login-layout>
+}

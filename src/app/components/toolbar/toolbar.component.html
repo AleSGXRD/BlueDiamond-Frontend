@@ -1,0 +1,50 @@
+<div class="left-0 right-0 flex flex-row items-center justify-between px-8 shadow-md bg-gray-50 dark:bg-zinc-700 ">
+    <span>
+      <div class="flex xl:hidden ">
+        <button mat-icon-button (click)="openSideBar.emit()" aria-label="Example icon-button with menu icon">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M4 6l16 0" />
+            <path d="M4 12l16 0" />
+            <path d="M4 18l16 0" />
+          </svg>
+        </button>
+      </div>
+    </span>
+    <span class="flex h-full items-center user">
+      <button mat-button   class="relative min-h-full" (click)="openMenu()">
+        <div class="flex flex-row gap-4 items-center h-full">
+          <div class="font-semibold text-lg">{{user.name}}</div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+            <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+            <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+          </svg>
+        </div>
+      </button>
+      <div  yPosition="below" [className]="'menu ' + (menuOpened == true? 'open' : 'hide')">
+        <button mat-menu-item (click)="logout()">
+          <div class="flex flex-row text-center items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-ramp-right-3" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M6 3v6" />
+              <path d="M16 16l4 -4l-4 -4" />
+              <path d="M6 21v-6a3 3 0 0 1 3 -3h11" />
+            </svg>
+            <div class="text-sm">
+              Cerrar Sesión
+            </div>
+          </div>
+        </button>
+      </div>
+      <app-button [color]="'green hidden'"  (click)="openFormAdd.emit()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 5l0 14" />
+            <path d="M5 12l14 0" />
+        </svg>
+      </app-button>
+    </span>
+
+  </div>

@@ -1,0 +1,92 @@
+
+@defer(){
+  <div class="flex flex-col min-w-full w-full gap-4">
+    <filter [form]="formFilter" [inputs]="inputsFormFilter" ></filter>
+    @if(services.length > 0){
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        @for (service of clientServices; track $index) {
+          <div [className]="'flex flex-col gap-4 text-left px-4 md:px-8 py-4 bg-gray-100 shadow-md rounded-md ' + (service.serviceState == 1 ? 'pendient' : (service.serviceState == 2? 'active': (service.serviceState == 3 ? 'finished' : '')))">
+            <div class="flex flex-row items-center justify-between">
+              <div>
+                <div class="text-lg tracking-tighter flex flex-wrap gap-2 text-start items-end">
+                  <strong [className]="'not-italic text-lg ' + (service.serviceState == 1 ? 'text-orange-500' : (service.serviceState == 2? 'text-green-500': (service.serviceState == 3 ? 'text-red-500' : ''))) ">Contrato {{service.serviceId}}</strong> <i class="text-base font-extralight">({{serviceDay(service)}})</i>
+                </div>
+                <div class="text-lg tracking-tighter font-extralight">
+                  Intervalo
+                  @if(service.permanent == true){
+                    permanente
+                  }
+                  @else {
+                    <strong>
+                      {{service.manyMonths}}
+                    </strong>
+                    meses
+                  }
+                </div>
+                <div [className]="'tracking-tighter font-extralight ' + (service.serviceState == 1 ? 'text-orange-500' : (service.serviceState == 2? 'text-green-500': (service.serviceState == 3 ? 'text-red-500' : '')))">
+                  {{getServiceState(service.serviceState)}}
+                </div>
+              </div>
+              <div class="flex flex-row gap-2 items-center">
+
+                  <app-button [color]="'red'" (click)="deleteService(clientId, service.serviceId ?? -1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M4 7l16 0" />
+                        <path d="M10 11l0 6" />
+                        <path d="M14 11l0 6" />
+                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                    </svg>
+                  </app-button>
+                @if (isMonthlyService(service) == false && isStabilizerService(service) == false) {
+                  <app-button [color]="'blue'" (click)="editService(service.serviceId ?? -1)" >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                        <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                        <path d="M16 5l3 3" />
+                    </svg>
+                  </app-button>
+                }
+              </div>
+            </div>
+            <items-table [items]="service.items"></items-table>
+            <div class="flex flex-row justify-end">
+              <p class="text-sm font-medium">Total: ${{service.amount.toFixed(2)}}</p>
+            </div>
+            <hr>
+            <div class="flex flex-wrap justify-end gap-2">
+              @switch(service.serviceState){
+                @case (0) {
+                  <app-button (click)="createEstimate(clientId, service.serviceId ?? -1)" [color]="'green'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M17 17h2a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2m10-8V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v4"/><path d="M7 15a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/></g></svg>
+                    <div class="absolute right-0 rounded-full text-center text-xs px-1 font-semibold bg-gray-100 text-green-500">EST</div>
+                  </app-button>
+                }
+                @case(1){
+                  @if(isMonthlyService(service) == false){
+                    <app-button (click)="createEstimate(clientId, service.serviceId ?? -1)" [color]="'gray'">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M17 17h2a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2m10-8V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v4"/><path d="M7 15a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/></g></svg>
+                      <div class="absolute right-0 rounded-full text-center text-xs px-1 font-semibold bg-gray-100 text-gray-500">EST</div>
+                    </app-button>
+                  }
+                }
+                @case (2) {
+                  <app-button (click)="createInvoices(clientId, service.serviceId ?? -1, {print : true, send:false})" [color]="'gray'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M17 17h2a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2m10-8V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v4"/><path d="M7 15a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/></g></svg>
+                    <div *ngIf="service.invoicesToPrint > 0" class="absolute bubble right-0 rounded-full text-center px-1 font-semibold text-gray-50 bg-gray-400">{{service.invoicesToPrint}}</div>
+                  </app-button>
+                }
+                @case (3){
+
+                }
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+}

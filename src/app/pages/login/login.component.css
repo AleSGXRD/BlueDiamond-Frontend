@@ -1,0 +1,7 @@
+section{
+  @apply flex flex-col w-full h-full justify-center items-center;
+}
+.form{
+  @apply flex flex-col gap-4 justify-center items-center max-w-xs px-12 py-12 bg-gray-50
+   bg-opacity-80 backdrop-blur-lg shadow-md rounded-md;
+}

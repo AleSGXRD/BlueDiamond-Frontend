@@ -1,0 +1,61 @@
+@if (condition() == true) {
+  @switch (input.type) {
+    @case (0) {
+      <form-field-text [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+              [placeholder]="input.placeholder" [form]="form" [value]="input.value"></form-field-text>
+    }
+    @case (1) {
+      <form-field-text-area [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+              [placeholder]="input.placeholder" [form]="form" [value]="input.value"></form-field-text-area>
+    }
+    @case (2) {
+      <form-field-select [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+      [placeholder]="input.placeholder" [form]="form" [value]="input.value" [options]="input.options ?? []" [apiService]="input.apiService"
+      [formApiProperties]="input.formApiProperties" ></form-field-select>
+    }
+    @case (3) {
+      <form-field-number [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+              [placeholder]="input.placeholder" [form]="form" [value]="input.value"></form-field-number>
+    }
+    @case (4) {
+      <form-field-boolean [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+              [placeholder]="input.placeholder" [form]="form" [value]="input.value"></form-field-boolean>
+    }
+    @case (5) {
+      <form-field-email [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+              [placeholder]="input.placeholder" [form]="form" [value]="input.value"></form-field-email>
+    }
+    @case (6) {
+      <form-field-phone-number [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+              [placeholder]="input.placeholder" [form]="form" [value]="input.value"></form-field-phone-number>
+    }
+    @case (7) {
+      <form-field-multiple-select [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+      [placeholder]="input.placeholder" [form]="form" [value]="input.value" [options]="input.options ?? []" [apiService]="input.apiService"
+      [formApiProperties]="input.formApiProperties" [inputEmitter]="input.inputEmitter ?? false"></form-field-multiple-select>
+
+    }
+    @case (8) {
+      <form-field-date [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+      [placeholder]="input.placeholder" [form]="form" [value]="input.value"></form-field-date>
+    }
+    @case (9) {
+      <form-field-datetime [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+      [placeholder]="input.placeholder" [form]="form" [value]="input.value"></form-field-datetime>
+    }
+    @case (10) {
+      <form-field-service-item [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+      [placeholder]="input.placeholder" [form]="form" [value]="input.value ?? ''" [options]="input.options ?? []" [apiService]="input.apiService"
+      [formApiProperties]="input.formApiProperties" [formControlNameLinked]="input.formControlNameLinked ?? ''"></form-field-service-item>
+
+    }
+    @case (11) {
+      <form-field-days-of-week [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+              [placeholder]="input.placeholder" [form]="form" [value]="input.value"></form-field-days-of-week>
+    }
+    @case (12) {
+      <form-field-password [fieldName]="input.name" [controlName]="input.formControlName" [errors]="input.errors"
+              [placeholder]="input.placeholder" [form]="form" [value]="input.value"></form-field-password>
+    }
+  }
+}

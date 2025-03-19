@@ -1,0 +1,74 @@
+    <app-background [className]="(openedSideBar == true? 'appeared' : 'disappeared')+ ' z-40 absolute xl:disappeared'" (desappear)="openSideBar(false)">
+        <app-sidebar [ngClass]="'xl:hidden z-30 transition-transform -left-64 ' + (openedSideBar==true? 'flex left-0' : 'hidden ')"></app-sidebar>
+    </app-background>
+    <app-toolbar class="z-20 relative w-full transition-all top-0 " (openFormAdd)="ActiveForm()" (openSideBar)="openSideBar(true)"></app-toolbar>
+
+
+    @if(cantOptions > 0){
+    <div class="fixed z-30 bottom-12 right-12 flex flex-col-reverse">
+
+        <ul [class]="'navigation'+(openedNavigation == true ? ' active' : '')" [style]="'--max-expand : ' + (80+((70*cantOptions)+10)) +'px' ">
+
+            <button [class]="( openedNavigation == false? 'border-slate-500 text-slate-500 hover:bg-slate-500 hover:text-gray-50 '  :
+            'border-slate-500 hover:text-slate-500 hover:bg-transparent bg-slate-500 text-gray-50 ' )
+            +' border-2 uppercase tracking-tighter p-2 rounded-full'" (click)="openNavigation()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4h4v4m-6 2l6-6M8 20H4v-4m0 4l6-6m6 6h4v-4m-6-2l6 6M8 4H4v4m0-4l6 6"/></svg>
+            </button>
+                @if(formData){
+                  @if(formData.form){
+                      <li class="navigation-item">
+                          <button class=" border-green-500 text-green-500 border-2 p-2
+                                      rounded-full hover:text-gray-200 hover:bg-green-500 transition-all"
+                                  (click)="ActiveForm()">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m-7-7h14"/></svg>
+                          </button>
+                      </li>
+                  }
+                }
+                @if(clientId){
+                  @if(clientId != -1){
+                    <li>
+                      <button class=" border-gray-500 text-gray-500 border-2 p-2
+                                      rounded-full hover:text-gray-200 hover:bg-gray-500 transition-all"
+                                  (click)="printAllInvoices()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M17 17h2a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2m10-8V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v4"/><path d="M7 15a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/></g></svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button class=" border-blue-500 text-blue-500 border-2 p-2
+                                      rounded-full hover:text-gray-200 hover:bg-blue-500 transition-all"
+                                  (click)="printAndSendAllInvoices()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5.5M19 22v-6m3 3l-3-3l-3 3"/><path d="m3 7l9 6l9-6"/></g></svg>
+                      </button>
+                    </li>
+                  }
+                  @else{
+                    <li>
+                      <button class=" border-gray-500 text-gray-500 border-2 p-2
+                                      rounded-full hover:text-gray-200 hover:bg-gray-500 transition-all"
+                                  (click)="printAllInvoicesAllClients()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M17 17h2a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2m10-8V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v4"/><path d="M7 15a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/></g></svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button class=" border-blue-500 text-blue-500 border-2 p-2
+                                      rounded-full hover:text-gray-200 hover:bg-blue-500 transition-all"
+                                  (click)="printAndSendAllInvoicesAllClients()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5.5M19 22v-6m3 3l-3-3l-3 3"/><path d="m3 7l9 6l9-6"/></g></svg>
+                      </button>
+                    </li>
+                  }
+                }
+                <!-- @if(canUseMultipleDelete){
+                    <li class="navigation-item ">
+                        <button [class]="(canDelete == false?'border-gray-500 text-gray-500 border-2 hover:text-gray-200 hover:bg-gray-500'
+                                            :'border-red-500 text-red-500 border-2 hover:text-gray-200 hover:bg-red-500') +' transition-all p-2 rounded-full'" (click)="deleteAll()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+                        </button>
+                    </li>
+                }
+             -->
+
+        </ul>
+    </div>
+}

@@ -1,0 +1,13 @@
+<section class="layout">
+  <app-sidebar class="xl:flex z-30 transition-transform -left-64 hidden"></app-sidebar>
+  <app-dialog></app-dialog>
+  <app-dialog-delete  ></app-dialog-delete>
+  <div class="content">
+    <app-navigation-mobile class="w-full"></app-navigation-mobile>
+    <app-form class="z-30"></app-form>
+    <ng-content></ng-content>
+  </div>
+  <div class="image-container">
+    <img src="/logo.png" class="logo" alt="Logo">
+  </div>
+</section>

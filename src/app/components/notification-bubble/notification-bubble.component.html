@@ -1,0 +1,7 @@
+
+<div class="fixed flex justify-center left-0 right-0 bottom-0 z-50 ">
+    <div *ngIf="notification.message != ''" id="message" [className]="'bubble hide ' + (notification.type == 0? 'success' : 'error')">
+        {{notification.message}}
+        <hr class="line">
+    </div>
+</div>

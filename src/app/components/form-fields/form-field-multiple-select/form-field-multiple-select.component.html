@@ -1,0 +1,27 @@
+
+<div [formGroup]="form" [className]="'field relative'+ (form.get(controlName)?.invalid && form.get(controlName)?.touched? 'error': '')">
+  <label [for]="controlName">{{fieldName}}</label>
+  <div class="relative w-full">
+    <button [id]="controlName" type="button" class="flex flex-row items-center justify-between border-2 outline-gray-400 min-w-24 rounded-md px-4 py-2 w-full bg-white text-left" (click)="toggleDropdown($event)">
+      <p>{{formValue ?? formValueInput}}</p>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block ml-2" viewBox="0 0 16 16">
+        <path fill="currentColor" d="M12 6l-4 4-4-4" />
+      </svg>
+    </button>
+    <ul *ngIf="isDropdownVisible == true" id="dropdown" class="absolute left-0 right-0 bg-white shadow-md border-t-0 border-gray-400 rounded-md mt-1 transition-all z-10">
+      @for(option of options; track $index){
+        <li [value]="option.value" (click)="setInputValue($index)" class="px-4 py-2 flex flex-row gap-4 cursor-pointer transition-all hover:bg-gray-200">
+          <div [className]="option.active ? 'active' : 'desactive'">-</div>
+          <div>
+            {{option.name}}
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+  <div class="field-error" *ngIf="form.get(controlName)?.invalid && form.get(controlName)?.touched">
+    @for (error of errors; track $index) {
+      <span *ngIf="form.get(controlName)?.errors?.[error.type]">{{error.message}}</span>
+    }
+  </div>
+</div>

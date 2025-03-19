@@ -1,0 +1,16 @@
+<div [className]="(formService.active == true? 'appeared' : 'disappeared') + ' background'" (click)="DesappearForm()">
+
+</div>
+<div [className]="(formService.active == true? 'appeared' : 'disappeared') + ' form z-40'">
+    <app-button [color]="'gray'" class="font-extrabold" (click)="DesappearForm()">
+        ×
+    </app-button>
+    <form (submit)="SendData()" [formGroup]="form"  *reloadComponent="inputs" class="inputs mt-4">
+        @for (input of inputs; track $index) {
+          <app-form-field class="w-full" [input]="input" [form]="form"></app-form-field>
+        }
+        <app-button [type]="'submit'" [color]="'primary'" class="w-[100%]" (click)="SendData()">
+            Enviar
+        </app-button>
+    </form>
+</div>

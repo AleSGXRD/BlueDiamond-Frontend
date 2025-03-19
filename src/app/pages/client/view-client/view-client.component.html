@@ -1,0 +1,142 @@
+<base-layout>
+  @defer () {
+    @if(client){
+      <section class="flex flex-col w-full justify-center items-center gap-16 px-2 md:px-8">
+        <div class="relative flex flex-col justify-center items-center md:flex-row gap-4 md:px-8 py-12 rounded-xl w-full ">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-hexagon  " width="192" height="192" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M12 13a3 3 0 1 0 0 -6a3 3 0 0 0 0 6z" />
+              <path d="M6.201 18.744a4 4 0 0 1 3.799 -2.744h4a4 4 0 0 1 3.798 2.741" />
+              <path d="M19.875 6.27c.7 .398 1.13 1.143 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z" />
+          </svg>
+          <div class="flex flex-col w-full grow gap-4 text-gray-800">
+            <div class="flex flex-row justify-between gap-4">
+              <div class="flex flex-col">
+                <div class="relative flex flex-row font-bold text-3xl">
+                  <div class="relative flex flex-row items-start text-pretty">
+                    {{client.clientId}} - {{client.name}}
+                    <strong class="text-xs ">
+                      {{languageClient}}
+                    </strong>
+                  </div>
+                </div>
+                <div class="flex flex-col md:flex-row md:gap-2">
+                  <div class="font-extralight text-lg">
+                    CP: {{client.cp}}
+                  </div>
+                  <div class="font-extralight text-lg">
+                    {{client.address}} | {{client.city}} | {{client.country}}
+                  </div>
+                </div>
+                <div *ngIf="client.commercial ==true" class="uppercase font-semibold text-amber-300">
+                  Comercial
+                </div>
+              </div>
+              <div class="flex flex-col sm:flex-row  gap-2">
+                <app-button [color]="'primary'" (click)="addHistoryClient()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 12v.01M3 21h18M5 21V5a2 2 0 0 1 2-2h7.5M17 13.5V21M14 7h7m-3-3l3 3l-3 3"/></svg>
+                </app-button>
+                <app-button [color]="'blue'" (click)="editClient()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                      <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                      <path d="M16 5l3 3" />
+                  </svg>
+                </app-button>
+                <app-button [color]="'red'" (click)="deleteClient(client.clientId ?? -1)">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M4 7l16 0" />
+                      <path d="M10 11l0 6" />
+                      <path d="M14 11l0 6" />
+                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                  </svg>
+                </app-button>
+              </div>
+            </div>
+            <div class="flex flex-row justify-between tracking-tighter text-lg gap-4">
+              <div class="flex flex-col gap-2 md:flex-row ">
+                <div class="font-extralight text-lg flex flex-row items-center gap-2 bg-gray-100
+                rounded-tr-md rounded-bl-md rounded-tl-3xl rounded-br-3xl px-4 py-2 shadow-md" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="m3 7l9 6l9-6"/></g></svg>
+                  <p>{{client.email}}</p>
+                </div>
+                <div class="font-extralight text-lg flex flex-row items-center gap-2 bg-gray-100
+                rounded-tr-md rounded-bl-md rounded-tl-3xl rounded-br-3xl px-4 py-2 shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+                  <p>{{client.phoneNumber}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-wrap justify-start gap-4">
+              <app-button [color]="'gray'" (click)="viewOffer()">
+                <div class="flex flex-row items-center justify-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M12 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v4.5"/><path d="M14 17.5a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0-5 0m4.5 2L21 22"/></g></svg>
+
+                  <p>
+                      Ver Oferta
+                  </p>
+                </div>
+              </app-button>
+              @if(client.offerApproved == false){
+                @if(client.offerSended == false){
+                  <app-button [color]="'blue'" (click)="sendServiceOffer()">
+                    <div class="flex flex-row items-center justify-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5.5M19 22v-6m3 3l-3-3l-3 3"/><path d="m3 7l9 6l9-6"/></g></svg>
+                      <p>
+                          Enviar oferta ${{client.maintenancePrice}}
+                      </p>
+                    </div>
+                  </app-button>
+                }
+                @else {
+                  <app-button [color]="'primary'" (click)="sendServiceOffer()">
+                    <div class="flex flex-row items-center justify-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5.5M19 22v-6m3 3l-3-3l-3 3"/><path d="m3 7l9 6l9-6"/></g></svg>
+                      <p>
+                        Reenviar oferta
+                      </p>
+
+                    </div>
+                  </app-button>
+                  <app-button [color]="'green'" (click)="approveServiceOffer()">
+                    <div class="flex flex-row items-center justify-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zm3 3a1 1 0 0 0 1 1h3.756a1 1 0 0 0 .958-.713l1.2-3c.09-.303.133-.63-.056-.884C12.67 16.149 12.316 16 12 16h-2v-2.467a1.1 1.1 0 0 0-2.015-.61L6 16zm8-17v4a1 1 0 0 0 1 1h4"/><path d="M5 12.1V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2h-2.3"/></g></svg>
+                      <p>
+                        Aprobar Servicio
+                      </p>
+                    </div>
+                  </app-button>
+                }
+              }
+            </div>
+          </div>
+          <ul class="absolute flex flex-row max-w-full left-0 right-0 -bottom-12 py-4 overflow-x-auto gap-4">
+            <li [className]="'sub-menu-item border-r-2 border-b-2 ' + (isThisView(0)?'active':'')" (click)="setView(0)" *reloadComponent="view">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M8 21H6a3 3 0 0 1-3-3v-1h5.5M17 8.5V5a2 2 0 1 1 2 2h-2"/><path d="M19 3H8a3 3 0 0 0-3 3v11M9 7h4m-4 4h4m5.42 1.61a2.1 2.1 0 0 1 2.97 2.97L15 22h-3v-3z"/></g></svg>
+              <p>Servicios</p>
+            </li>
+            <li [className]="'sub-menu-item border-b-2 border-r-2 ' + (isThisView(1)?'active':'')" (click)="setView(1)" *reloadComponent="view">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2M9 7h1m-1 6h6m-2 4h2"/></g></svg>
+              <p>Invoices</p>
+            </li>
+            <li [className]="'sub-menu-item border-b-2 border-r-2 ' + (isThisView(3)?'active':'')" (click)="setView(3)" *reloadComponent="view">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><path d="M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2m0 12v-5m3 5v-1m3 1v-3"/></g></svg>
+              <p>Estimados</p>
+            </li>
+            <li [className]="'sub-menu-item border-b-2 border-r-2 ' + (isThisView(2)?'active':'')" (click)="setView(2)" *reloadComponent="view">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 8v4l2 2"/><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"/></g></svg>
+              <p>Historias</p>
+            </li>
+          </ul>
+        </div>
+        <client-services class="w-full" *ngIf="isThisView(0)" [services]="client.services ?? []" [clientId]="client.clientId ?? 0" [maintenancePrice]="client.maintenancePrice" [stabilizerPrice]="client.stabilizerPrice" [commercial]="client.commercial"></client-services>
+        <client-invoices class="w-full" *ngIf="isThisView(1)" [invoices]="client.invoices ?? []"></client-invoices>
+        <client-histories class="w-full" *ngIf="isThisView(2)" [histories]="client.histories ?? []"></client-histories>
+        <client-estimates class="w-full" *ngIf="isThisView(3)" [estimates]="client.estimates ?? []"></client-estimates>
+      </section>
+    }
+  }
+</base-layout>

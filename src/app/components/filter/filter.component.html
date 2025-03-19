@@ -1,0 +1,6 @@
+
+<form  [formGroup]="form"  class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
+    @for (input of inputs; track $index) {
+      <app-form-field class="w-full" [input]="input" [form]="form"></app-form-field>
+    }
+</form>

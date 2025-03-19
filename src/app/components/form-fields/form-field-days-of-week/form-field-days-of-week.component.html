@@ -1,0 +1,42 @@
+@if(value != undefined){
+  <section class="field gap-2">
+    <label [for]="controlName">{{fieldName}}</label>
+
+    <table class="w-full">
+      <thead>
+        <tr class="grid grid-cols-7">
+          <th>
+            M
+          </th>
+          <th>
+            T
+          </th>
+          <th>
+            W
+          </th>
+          <th>
+            T
+          </th>
+          <th>
+            F
+          </th>
+          <th>
+            S
+          </th>
+          <th>
+            S
+          </th>
+        </tr>
+      </thead>
+      <tbody class="flex flex-col gap-4">
+          <tr class="grid grid-cols-7 gap-4" [formGroup]="formDaysOfWeek">
+            @for (day of days; track $index) {
+              <td ><input class="input" type="checkbox" (input)="onInput(day)" [formControlName]="day" [name]="day" [id]="day" [value]="false"></td>
+            }
+          </tr>
+      </tbody>
+    </table>
+
+  </section>
+
+}

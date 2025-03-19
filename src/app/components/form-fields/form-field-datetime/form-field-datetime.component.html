@@ -1,0 +1,29 @@
+
+<div [formGroup]="formDatetime" [className]="'field '+ (form.get(controlName)?.invalid && form.get(controlName)?.touched? 'error': '')">
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-2">
+      <label [for]="'date'">{{fieldName}}</label>
+      <input type="date" [placeholder]="placeholder ?? fieldName+'...'" [formControlName]="'date'" [name]="'date'" [id]="'date'" (input)="inputDate($event)">
+    </div>
+    <div class="flex flex-row gap-4">
+      <div class="flex flex-col gap-2">
+        <label [for]="'hours'">Hours</label>
+        <input type="number" [value]="00" [placeholder]="'00'" formControlName="hours" [name]="'hours'" [id]="'hours'" (input)="inputHours($event)">
+      </div>
+      <div class="flex flex-col gap-2">
+        <label [for]="'minutes'">Minutes</label>
+        <input type="number" [value]="00" [placeholder]="'00'" formControlName="minutes" [name]="'minutes'" [id]="'minutes'" (input)="inputMinutes($event)">
+      </div>
+      <div class="flex flex-col gap-2">
+        <label [for]="'seconds'">Seconds</label>
+        <input type="number" [value]="00" [placeholder]="'00'" formControlName="seconds" [name]="'seconds'" [id]="'seconds'" (input)="inputSeconds($event)">
+      </div>
+    </div>
+  </div>
+
+  <div class="field-error" *ngIf="form.get(controlName)?.invalid && form.get(controlName)?.touched">
+    @for (error of errors; track $index) {
+      <span *ngIf="form.get(controlName)?.errors?.[error.type]">{{error.message}}</span>
+    }
+  </div>
+</div>
